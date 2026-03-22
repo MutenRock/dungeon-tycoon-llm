@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dungeon Tycoon LLM</title>
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/game.css">
+  <link rel="stylesheet" href="assets/css/dialogue.css">
+</head>
+<body>
+  <header>
+    <h1 id="dungeon-title">Dungeon Tycoon LLM</h1>
+    <div id="status-bar">
+      <span id="day-display">Day 1</span>
+      <span id="phase-display">Night</span>
+      <span id="lives-display">❤❤❤</span>
+      <span id="treasure-display">💰 100</span>
+      <button id="lang-toggle" onclick="toggleLanguage()">EN/FR</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="left-panel">
+      <!-- Resource Panel -->
+      <div id="resource-panel" class="panel">
+        <h3 data-i18n="resources">Resources</h3>
+        <div id="resources-list"></div>
+      </div>
+
+      <!-- Room Palette -->
+      <div id="room-palette" class="panel">
+        <h3 data-i18n="rooms">Rooms</h3>
+        <div id="palette-list"></div>
+      </div>
+
+      <!-- Advisor Sidebar -->
+      <div id="advisor-panel" class="panel">
+        <h3 data-i18n="advisors">Advisors</h3>
+        <div id="advisor-list"></div>
+      </div>
+    </section>
+
+    <section id="center-panel">
+      <!-- Dungeon Grid -->
+      <div id="grid-container">
+        <div id="grid"></div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div id="actions">
+        <button id="night-btn" data-i18n="resolve_night">Resolve Night</button>
+        <button id="raid-btn" data-i18n="start_raid">Start Raid</button>
+        <button id="save-pattern-btn" data-i18n="save_pattern">Save Pattern</button>
+        <button id="save-btn" data-i18n="save_game">Save Game</button>
+      </div>
+
+      <!-- Chatter Overlay -->
+      <div id="chatter-overlay" class="hidden"></div>
+    </section>
+
+    <section id="right-panel">
+      <!-- Raid Log -->
+      <div id="raid-log" class="panel">
+        <h3 data-i18n="raid_log">Raid Log</h3>
+        <div id="raid-log-content"></div>
+      </div>
+
+      <!-- Dialogue Panel -->
+      <div id="dialogue-panel" class="panel hidden">
+        <div id="dialogue-header">
+          <span id="dialogue-npc-name"></span>
+          <button id="dialogue-close" onclick="closeDialogue()">✕</button>
+        </div>
+        <div id="dialogue-messages"></div>
+        <div id="dialogue-input-area">
+          <input type="text" id="dialogue-input" placeholder="Type your response...">
+          <button id="dialogue-send" onclick="sendDialogue()">Send</button>
+        </div>
+      </div>
+
+      <!-- Game Log -->
+      <div id="game-log" class="panel">
+        <h3 data-i18n="log">Log</h3>
+        <div id="log-content"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/state.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/grid.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/dialogue.js"></script>
+  <script src="assets/js/chatter.js"></script>
+  <script src="assets/js/raid_view.js"></script>
+</body>
+</html>

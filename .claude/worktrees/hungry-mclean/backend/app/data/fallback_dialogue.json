@@ -1,0 +1,58 @@
+{
+  "daily_summary": {
+    "en": [
+      "Another day in the depths. The dungeon holds steady.",
+      "The monsters grumble but obey. Resources are stable.",
+      "Darkness settles over the dungeon. All is quiet... for now."
+    ],
+    "fr": [
+      "Un autre jour dans les profondeurs. Le donjon tient bon.",
+      "Les monstres grognent mais obéissent. Les ressources sont stables.",
+      "L'obscurité s'installe sur le donjon. Tout est calme... pour l'instant."
+    ]
+  },
+  "monster_chatter": {
+    "en": [
+      ["Did you hear that? Sounded like heroes...", "Nah, just rats. Big rats."],
+      ["I'm hungry. When's dinner?", "You're always hungry. There's bones in the corner."],
+      ["The boss is watching. Act busy.", "How? I'm a skeleton. I'm always acting."],
+      ["I bet I could take a knight.", "Last time you said that, you lost an arm."],
+      ["These corridors need better lighting.", "We're dungeon monsters. We don't DO lighting."]
+    ],
+    "fr": [
+      ["T'as entendu ça? On dirait des héros...", "Non, juste des rats. De gros rats."],
+      ["J'ai faim. C'est quand le repas?", "T'as toujours faim. Y'a des os dans le coin."],
+      ["Le boss nous regarde. Faites semblant de bosser.", "Comment? Je suis un squelette. Je fais toujours semblant."],
+      ["Je parie que je pourrais battre un chevalier.", "La dernière fois que t'as dit ça, t'as perdu un bras."],
+      ["Ces couloirs ont besoin de meilleur éclairage.", "On est des monstres de donjon. On fait PAS d'éclairage."]
+    ]
+  },
+  "raid_narration": {
+    "en": [
+      "The heroes charge blindly into the darkness.",
+      "A brave party enters the dungeon, torches held high.",
+      "Footsteps echo through the halls. The raid begins."
+    ],
+    "fr": [
+      "Les héros chargent aveuglément dans l'obscurité.",
+      "Un groupe courageux entre dans le donjon, torches en main.",
+      "Des pas résonnent dans les salles. Le raid commence."
+    ]
+  },
+  "advisor_interjection": {
+    "en": {
+      "counselor": "My lord, a word if you please...",
+      "high_guard": "Commander! I have a tactical report!",
+      "kitchen_chief": "Boss! About tonight's menu...",
+      "spy_master": "Psst... I have intelligence to share...",
+      "architect": "My liege, regarding the dungeon layout..."
+    },
+    "fr": {
+      "counselor": "Mon seigneur, un mot si vous le permettez...",
+      "high_guard": "Commandant ! J'ai un rapport tactique !",
+      "kitchen_chief": "Chef ! À propos du menu de ce soir...",
+      "spy_master": "Psst... J'ai des informations à partager...",
+      "architect": "Mon suzerain, concernant le plan du donjon..."
+    }
+  }
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "hero_class": "knight",
+    "name_en": "Knight",
+    "name_fr": "Chevalier",
+    "description": "Heavy armor, high defense. Tank of the party.",
+    "tier_stats": {
+      "common":       {"hp": 12, "attack": 3, "defense": 3, "speed": 1},
+      "veteran":      {"hp": 18, "attack": 5, "defense": 5, "speed": 1},
+      "local_legend": {"hp": 25, "attack": 7, "defense": 7, "speed": 2},
+      "legendary":    {"hp": 35, "attack": 10, "defense": 10, "speed": 2}
+    }
+  },
+  {
+    "hero_class": "archer",
+    "name_en": "Archer",
+    "name_fr": "Archer",
+    "description": "Ranged attacker. Strikes first, fragile up close.",
+    "tier_stats": {
+      "common":       {"hp": 8, "attack": 5, "defense": 1, "speed": 3},
+      "veteran":      {"hp": 12, "attack": 8, "defense": 2, "speed": 4},
+      "local_legend": {"hp": 16, "attack": 11, "defense": 3, "speed": 5},
+      "legendary":    {"hp": 22, "attack": 15, "defense": 4, "speed": 6}
+    }
+  },
+  {
+    "hero_class": "mage",
+    "name_en": "Mage",
+    "name_fr": "Mage",
+    "description": "Devastating spells but paper-thin defenses.",
+    "tier_stats": {
+      "common":       {"hp": 6, "attack": 7, "defense": 0, "speed": 2},
+      "veteran":      {"hp": 9, "attack": 11, "defense": 1, "speed": 2},
+      "local_legend": {"hp": 13, "attack": 15, "defense": 2, "speed": 3},
+      "legendary":    {"hp": 18, "attack": 20, "defense": 3, "speed": 3}
+    }
+  },
+  {
+    "hero_class": "rogue",
+    "name_en": "Rogue",
+    "name_fr": "Voleur",
+    "description": "Fast and sneaky. Can detect and disarm traps.",
+    "tier_stats": {
+      "common":       {"hp": 8, "attack": 4, "defense": 1, "speed": 4},
+      "veteran":      {"hp": 11, "attack": 7, "defense": 2, "speed": 5},
+      "local_legend": {"hp": 15, "attack": 10, "defense": 3, "speed": 6},
+      "legendary":    {"hp": 20, "attack": 14, "defense": 4, "speed": 8}
+    }
+  },
+  {
+    "hero_class": "cleric",
+    "name_en": "Cleric",
+    "name_fr": "Clerc",
+    "description": "Healer and support. Keeps the party alive.",
+    "tier_stats": {
+      "common":       {"hp": 10, "attack": 2, "defense": 2, "speed": 1},
+      "veteran":      {"hp": 14, "attack": 4, "defense": 4, "speed": 1},
+      "local_legend": {"hp": 20, "attack": 6, "defense": 6, "speed": 2},
+      "legendary":    {"hp": 28, "attack": 8, "defense": 8, "speed": 2}
+    }
+  }
+]

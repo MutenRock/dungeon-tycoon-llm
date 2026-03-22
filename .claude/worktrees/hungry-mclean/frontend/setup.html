@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dungeon Tycoon — New Game</title>
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/setup.css">
+</head>
+<body>
+  <div id="setup-wizard">
+    <!-- Step 1: Species Selection -->
+    <section id="step-1" class="wizard-step active">
+      <h2>Choose Your Monster Species</h2>
+      <p>Select the dominant species that will populate your dungeon.</p>
+      <div id="species-grid" class="card-grid"></div>
+      <button class="next-btn" onclick="nextStep(2)">Next →</button>
+    </section>
+
+    <!-- Step 2: Dungeon Name -->
+    <section id="step-2" class="wizard-step">
+      <h2>Name Your Dungeon</h2>
+      <p>Spin the wheel or choose a name from the themes below.</p>
+      <div id="name-themes"></div>
+      <div id="selected-name-display"></div>
+      <input type="text" id="custom-name" placeholder="...or type a custom name">
+      <button class="next-btn" onclick="nextStep(3)">Next →</button>
+    </section>
+
+    <!-- Step 3: Advisor Race -->
+    <section id="step-3" class="wizard-step">
+      <h2>Choose Your Advisors' Race</h2>
+      <p>Your inner circle: counselor, high guard, kitchen chief, spy master, architect.</p>
+      <div id="race-grid" class="card-grid"></div>
+      <button class="next-btn" onclick="nextStep(4)">Next →</button>
+    </section>
+
+    <!-- Step 4: Lucifer Intro -->
+    <section id="step-4" class="wizard-step">
+      <h2>An Audience with Lucifer</h2>
+      <p>The Lord of Hell wishes to know you before granting your dungeon...</p>
+      <div id="lucifer-dialogue">
+        <div id="lucifer-portrait">👿</div>
+        <div id="lucifer-messages"></div>
+        <div id="lucifer-input-area">
+          <input type="text" id="lucifer-input" placeholder="Your answer...">
+          <button onclick="answerLucifer()">Respond</button>
+        </div>
+      </div>
+      <button id="start-game-btn" class="next-btn hidden" onclick="startGame()">Enter Your Dungeon →</button>
+    </section>
+  </div>
+
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/setup.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{
+  "themes": [
+    {
+      "theme": "dark",
+      "names_en": [
+        "The Abyssal Depths", "Shadowmaw Caverns", "The Obsidian Pit",
+        "Nightfall Catacombs", "The Void Below", "Dread Hollow",
+        "The Sunless Keep", "Blackthorn Dungeon", "The Forsaken Halls"
+      ],
+      "names_fr": [
+        "Les Profondeurs Abyssales", "Les Cavernes de l'Ombre", "La Fosse d'Obsidienne",
+        "Les Catacombes du Crépuscule", "Le Vide d'En-Bas", "Le Creux de l'Effroi",
+        "Le Donjon sans Soleil", "Le Donjon d'Épine-Noire", "Les Salles Abandonnées"
+      ]
+    },
+    {
+      "theme": "fire",
+      "names_en": [
+        "The Infernal Forge", "Hellfire Caverns", "The Molten Core",
+        "Cinder Keep", "The Burning Depths", "Ember's End",
+        "Ash Pit Dungeon", "The Scorched Halls", "Brimstone Labyrinth"
+      ],
+      "names_fr": [
+        "La Forge Infernale", "Les Cavernes de Flammes", "Le Noyau en Fusion",
+        "Le Donjon de Braise", "Les Profondeurs Brûlantes", "La Fin des Cendres",
+        "Le Puits de Cendre", "Les Salles Calcinées", "Le Labyrinthe de Soufre"
+      ]
+    },
+    {
+      "theme": "bone",
+      "names_en": [
+        "The Bone Cathedral", "Skull Keep", "The Ossuary",
+        "Marrow Depths", "The Ivory Tomb", "Necropolis Prime",
+        "Deathwhisper Halls", "The Charnel Pit", "Rib Cage Dungeon"
+      ],
+      "names_fr": [
+        "La Cathédrale d'Os", "Le Donjon du Crâne", "L'Ossuaire",
+        "Les Profondeurs de Moelle", "La Tombe d'Ivoire", "La Nécropole Première",
+        "Les Salles du Murmure Mortel", "La Fosse Charnier", "Le Donjon de la Cage Thoracique"
+      ]
+    },
+    {
+      "theme": "swamp",
+      "names_en": [
+        "The Rotting Bog", "Mire Keep", "The Fungal Depths",
+        "Swamp Thing's Lair", "The Putrid Pit", "Mossgrip Dungeon",
+        "The Festering Halls", "Bog of Despair", "Toadstool Caverns"
+      ],
+      "names_fr": [
+        "Le Marécage Putride", "Le Donjon de la Fange", "Les Profondeurs Fongiques",
+        "L'Antre de la Créature du Marais", "La Fosse Fétide", "Le Donjon de Mousse",
+        "Les Salles Purulentes", "Le Marais du Désespoir", "Les Cavernes Champignon"
+      ]
+    },
+    {
+      "theme": "ice",
+      "names_en": [
+        "The Frozen Abyss", "Frostbite Caverns", "The Glacial Tomb",
+        "Winter's Maw", "The Permafrost Pit", "Icicle Dungeon",
+        "The Shattered Glacier", "Blizzard Keep", "The Howling Cold"
+      ],
+      "names_fr": [
+        "L'Abîme Gelé", "Les Cavernes de Givre", "La Tombe Glaciale",
+        "La Gueule de l'Hiver", "La Fosse de Permafrost", "Le Donjon de Glace",
+        "Le Glacier Brisé", "Le Donjon du Blizzard", "Le Froid Hurlant"
+      ]
+    }
+  ]
+}

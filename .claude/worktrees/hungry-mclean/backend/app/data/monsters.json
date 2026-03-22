@@ -1,0 +1,123 @@
+[
+  {
+    "species_id": "goblin",
+    "name": "Goblin",
+    "name_fr": "Gobelin",
+    "description": "Small, cunning, and endlessly chatty. Cheap but fragile.",
+    "description_fr": "Petit, rusé et bavard à l'infini. Pas cher mais fragile.",
+    "base_power": 3,
+    "base_hp": 6,
+    "traits": ["sneaky", "cowardly", "chatty"],
+    "tasks": ["worker", "cook", "spy"],
+    "variants": [
+      {"id": "goblin_warrior", "name": "Goblin Warrior", "power_bonus": 2, "hp_bonus": 2},
+      {"id": "goblin_shaman", "name": "Goblin Shaman", "power_bonus": 3, "hp_bonus": 0},
+      {"id": "goblin_thief", "name": "Goblin Thief", "power_bonus": 1, "hp_bonus": 1}
+    ]
+  },
+  {
+    "species_id": "orc",
+    "name": "Orc",
+    "name_fr": "Orc",
+    "description": "Brute muscle. Strong guards but slow workers.",
+    "description_fr": "Force brute. Bons gardes mais ouvriers lents.",
+    "base_power": 6,
+    "base_hp": 12,
+    "traits": ["strong", "aggressive", "proud"],
+    "tasks": ["guard", "worker"],
+    "variants": [
+      {"id": "orc_berserker", "name": "Orc Berserker", "power_bonus": 4, "hp_bonus": 3},
+      {"id": "orc_warchief", "name": "Orc Warchief", "power_bonus": 3, "hp_bonus": 5}
+    ]
+  },
+  {
+    "species_id": "skeleton",
+    "name": "Skeleton",
+    "name_fr": "Squelette",
+    "description": "Tireless undead. Excellent workers, mediocre fighters.",
+    "description_fr": "Mort-vivant infatigable. Excellent ouvrier, combattant médiocre.",
+    "base_power": 2,
+    "base_hp": 8,
+    "traits": ["tireless", "silent", "obedient"],
+    "tasks": ["worker", "guard"],
+    "variants": [
+      {"id": "skeleton_archer", "name": "Skeleton Archer", "power_bonus": 3, "hp_bonus": 0},
+      {"id": "skeleton_knight", "name": "Skeleton Knight", "power_bonus": 2, "hp_bonus": 4}
+    ]
+  },
+  {
+    "species_id": "imp",
+    "name": "Imp",
+    "name_fr": "Diablotin",
+    "description": "Tiny demon. Sneaky, magical, and mischievous.",
+    "description_fr": "Petit démon. Furtif, magique et espiègle.",
+    "base_power": 4,
+    "base_hp": 5,
+    "traits": ["magical", "mischievous", "intelligent"],
+    "tasks": ["spy", "cook"],
+    "variants": [
+      {"id": "imp_fire", "name": "Fire Imp", "power_bonus": 3, "hp_bonus": 0},
+      {"id": "imp_shadow", "name": "Shadow Imp", "power_bonus": 2, "hp_bonus": 2}
+    ]
+  },
+  {
+    "species_id": "troll",
+    "name": "Troll",
+    "name_fr": "Troll",
+    "description": "Huge and regenerating. Expensive but devastating in combat.",
+    "description_fr": "Énorme et régénérant. Cher mais dévastateur au combat.",
+    "base_power": 8,
+    "base_hp": 20,
+    "traits": ["regenerating", "stupid", "hungry"],
+    "tasks": ["guard"],
+    "variants": [
+      {"id": "troll_cave", "name": "Cave Troll", "power_bonus": 2, "hp_bonus": 5},
+      {"id": "troll_bridge", "name": "Bridge Troll", "power_bonus": 1, "hp_bonus": 8}
+    ]
+  },
+  {
+    "species_id": "centaur",
+    "name": "Centaur",
+    "name_fr": "Centaure",
+    "description": "Noble half-horse. Fast, wise, and versatile.",
+    "description_fr": "Noble mi-cheval. Rapide, sage et polyvalent.",
+    "base_power": 5,
+    "base_hp": 14,
+    "traits": ["wise", "fast", "proud"],
+    "tasks": ["guard", "worker", "spy"],
+    "variants": [
+      {"id": "centaur_archer", "name": "Centaur Archer", "power_bonus": 3, "hp_bonus": 1},
+      {"id": "centaur_sage", "name": "Centaur Sage", "power_bonus": 1, "hp_bonus": 3}
+    ]
+  },
+  {
+    "species_id": "slime",
+    "name": "Slime",
+    "name_fr": "Gelée",
+    "description": "Amorphous blob. Cheap trap filler, splits when hit.",
+    "description_fr": "Masse amorphe. Remplissage de piège pas cher, se divise quand frappé.",
+    "base_power": 2,
+    "base_hp": 15,
+    "traits": ["amorphous", "splitting", "mindless"],
+    "tasks": ["guard"],
+    "variants": [
+      {"id": "slime_acid", "name": "Acid Slime", "power_bonus": 3, "hp_bonus": 0},
+      {"id": "slime_giant", "name": "Giant Slime", "power_bonus": 1, "hp_bonus": 10}
+    ]
+  },
+  {
+    "species_id": "dark_elf",
+    "name": "Dark Elf",
+    "name_fr": "Elfe Noir",
+    "description": "Exiled elves turned to darkness. Cunning and magical.",
+    "description_fr": "Elfes exilés tournés vers les ténèbres. Rusés et magiques.",
+    "base_power": 5,
+    "base_hp": 9,
+    "traits": ["cunning", "magical", "arrogant"],
+    "tasks": ["spy", "guard", "cook"],
+    "variants": [
+      {"id": "dark_elf_assassin", "name": "Dark Elf Assassin", "power_bonus": 4, "hp_bonus": 0},
+      {"id": "dark_elf_sorceress", "name": "Dark Elf Sorceress", "power_bonus": 5, "hp_bonus": -1}
+    ]
+  }
+]
