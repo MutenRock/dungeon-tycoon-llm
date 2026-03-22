@@ -1,0 +1,186 @@
+#setup-wizard {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.wizard-step {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.wizard-step.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.wizard-step h2 {
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+.wizard-step p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.species-card, .race-card {
+  background: var(--bg-panel);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.1s;
+}
+
+.species-card:hover, .race-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.species-card.selected, .race-card.selected {
+  border-color: var(--gold);
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.species-card h4, .race-card h4 {
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.species-card p, .race-card p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.species-card .traits {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.trait-tag {
+  background: var(--bg-dark);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* Name selection */
+#name-themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.theme-group {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.theme-group h4 {
+  color: var(--accent);
+  font-size: 13px;
+  margin-bottom: 6px;
+  text-transform: capitalize;
+}
+
+.name-option {
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 13px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.name-option:hover {
+  background: var(--bg-cell-hover);
+}
+
+.name-option.selected {
+  background: var(--accent);
+  color: white;
+}
+
+#selected-name-display {
+  font-size: 20px;
+  color: var(--gold);
+  text-align: center;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.next-btn {
+  display: block;
+  margin: 20px auto 0;
+  padding: 12px 32px;
+  font-size: 16px;
+}
+
+/* Lucifer dialogue */
+#lucifer-dialogue {
+  background: var(--bg-panel);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#lucifer-portrait {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+#lucifer-messages {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+.lucifer-msg {
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.lucifer-msg.question {
+  background: rgba(233, 69, 96, 0.15);
+  border-left: 3px solid var(--accent);
+}
+
+.lucifer-msg.answer {
+  background: var(--bg-dark);
+  border-left: 3px solid var(--green);
+  margin-left: 20px;
+}
+
+#lucifer-input-area {
+  display: flex;
+  gap: 8px;
+}
+
+#lucifer-input {
+  flex: 1;
+}

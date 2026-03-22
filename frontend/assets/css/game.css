@@ -1,0 +1,195 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: var(--bg-panel);
+  border-bottom: 2px solid var(--accent);
+}
+
+header h1 {
+  font-size: 20px;
+  color: var(--accent);
+}
+
+#status-bar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+}
+
+#status-bar span {
+  padding: 4px 8px;
+  background: var(--bg-dark);
+  border-radius: 4px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 220px 1fr 280px;
+  gap: 12px;
+  padding: 12px;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+#left-panel, #right-panel {
+  overflow-y: auto;
+}
+
+#center-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Grid */
+#grid {
+  display: grid;
+  grid-template-columns: repeat(10, 44px);
+  grid-template-rows: repeat(10, 44px);
+  gap: 2px;
+  background: var(--bg-dark);
+  padding: 4px;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+}
+
+.cell {
+  width: 44px;
+  height: 44px;
+  background: var(--bg-cell);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  position: relative;
+}
+
+.cell:hover {
+  background: var(--bg-cell-hover);
+}
+
+.cell.room-corridor { background: var(--room-corridor); }
+.cell.room-monster_room { background: var(--room-monster); }
+.cell.room-trap_room { background: var(--room-trap); }
+.cell.room-treasure_room { background: var(--room-treasure); }
+.cell.room-boss_room { background: var(--room-boss); }
+.cell.room-bonus_room { background: var(--room-bonus); }
+.cell.room-barracks { background: var(--room-barracks); }
+.cell.room-kitchen { background: var(--room-kitchen); }
+.cell.room-workshop { background: var(--room-workshop); }
+.cell.room-prison { background: var(--room-prison); }
+
+/* Room icons */
+.cell.room-corridor::after { content: "🚪"; }
+.cell.room-monster_room::after { content: "👹"; }
+.cell.room-trap_room::after { content: "⚠️"; }
+.cell.room-treasure_room::after { content: "💎"; }
+.cell.room-boss_room::after { content: "👑"; }
+.cell.room-bonus_room::after { content: "🎁"; }
+.cell.room-barracks::after { content: "⚔️"; }
+.cell.room-kitchen::after { content: "🍖"; }
+.cell.room-workshop::after { content: "🔨"; }
+.cell.room-prison::after { content: "🔒"; }
+
+#actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Resource panel */
+#resources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.resource-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 4px;
+}
+
+/* Room palette */
+#palette-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.palette-item {
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.palette-item:hover {
+  background: var(--bg-cell-hover);
+}
+
+.palette-item.selected {
+  background: var(--accent);
+}
+
+/* Advisor list */
+#advisor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.advisor-item {
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.15s;
+}
+
+.advisor-item:hover {
+  background: var(--bg-cell-hover);
+}
+
+/* Log panels */
+#raid-log-content, #log-content {
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+#log-content p, #raid-log-content p {
+  padding: 2px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Chatter overlay */
+#chatter-overlay {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(22, 33, 62, 0.95);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 20px;
+  max-width: 500px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-secondary);
+  z-index: 100;
+}

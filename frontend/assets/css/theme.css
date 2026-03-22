@@ -1,0 +1,74 @@
+:root {
+  --bg-dark: #1a1a2e;
+  --bg-panel: #16213e;
+  --bg-cell: #0f3460;
+  --bg-cell-hover: #1a4a7a;
+  --text-primary: #e8e8e8;
+  --text-secondary: #a0a0c0;
+  --accent: #e94560;
+  --accent-hover: #ff6b81;
+  --gold: #ffd700;
+  --green: #4ecca3;
+  --red: #e94560;
+  --blue: #3498db;
+  --purple: #9b59b6;
+  --border: #2a2a4a;
+  --room-corridor: #3a3a5a;
+  --room-monster: #8b0000;
+  --room-trap: #cc5500;
+  --room-treasure: #daa520;
+  --room-boss: #4a0080;
+  --room-bonus: #2e8b57;
+  --room-barracks: #704214;
+  --room-kitchen: #cd853f;
+  --room-workshop: #708090;
+  --room-prison: #2f4f4f;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-primary);
+}
+
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.panel h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: var(--accent-hover);
+}
+
+input[type="text"] {
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
