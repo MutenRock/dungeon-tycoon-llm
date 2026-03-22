@@ -1,0 +1,24 @@
+{
+  "starting_resources": {"wood": 50, "stone": 50, "meat": 30, "vegetables": 0, "gold": 0},
+  "starting_treasure": 100,
+  "starting_lives": 3,
+  "death_penalties": {"1": 0.0, "2": 0.25, "3": 0.50},
+  "night_income": {"wood": 10, "stone": 10, "meat": 5},
+  "worker_production": {
+    "wood": {"base": 3, "per_worker": 2},
+    "stone": {"base": 3, "per_worker": 2},
+    "meat": {"base": 1, "per_worker": 1},
+    "vegetables": {"base": 0, "per_worker": 1}
+  },
+  "hero_party_size": {"min": 1, "max": 10, "day_scaling": 0.3},
+  "hero_tier_weights_by_day": {
+    "early": {"common": 0.8, "veteran": 0.2, "local_legend": 0.0, "legendary": 0.0},
+    "mid":   {"common": 0.4, "veteran": 0.4, "local_legend": 0.15, "legendary": 0.05},
+    "late":  {"common": 0.1, "veteran": 0.3, "local_legend": 0.35, "legendary": 0.25}
+  },
+  "day_thresholds": {"early": 1, "mid": 6, "late": 15},
+  "trap_base_damage": {"spikes": 8, "arrows": 6, "pit": 12, "poison_gas": 10, "boulder": 15},
+  "raid_treasure_gain_on_defense": 15,
+  "raid_treasure_loss_on_breach": 10,
+  "boss_damage_on_breach": 1
+}

@@ -1,0 +1,107 @@
+[
+  {
+    "type": "corridor",
+    "name_en": "Corridor",
+    "name_fr": "Couloir",
+    "description": "Basic connecting passage. No special effects.",
+    "w": 1, "h": 1,
+    "cost": {"wood": 5, "stone": 5},
+    "max_doors": 4,
+    "max_monsters": 0
+  },
+  {
+    "type": "monster_room",
+    "name_en": "Monster Room",
+    "name_fr": "Salle de Monstres",
+    "description": "A chamber where monsters lie in wait for heroes.",
+    "w": 1, "h": 1,
+    "cost": {"wood": 10, "stone": 10},
+    "max_doors": 2,
+    "max_monsters": 3
+  },
+  {
+    "type": "trap_room",
+    "name_en": "Trap Room",
+    "name_fr": "Salle de Pièges",
+    "description": "Filled with deadly traps. Heroes who've seen it before may avoid them.",
+    "w": 1, "h": 1,
+    "cost": {"wood": 15, "stone": 10},
+    "max_doors": 2,
+    "max_monsters": 0,
+    "trap_types": ["spikes", "arrows", "pit", "poison_gas", "boulder"]
+  },
+  {
+    "type": "treasure_room",
+    "name_en": "Treasure Room",
+    "name_fr": "Salle du Trésor",
+    "description": "Stores gold. Heroes that reach it steal treasure.",
+    "w": 1, "h": 1,
+    "cost": {"wood": 20, "stone": 20},
+    "max_doors": 1,
+    "max_monsters": 1
+  },
+  {
+    "type": "boss_room",
+    "name_en": "Boss Room",
+    "name_fr": "Salle du Boss",
+    "description": "The dungeon master's throne. 2x1 size. Last line of defense.",
+    "w": 2, "h": 1,
+    "cost": {"wood": 0, "stone": 0},
+    "max_doors": 1,
+    "max_monsters": 0,
+    "unique": true
+  },
+  {
+    "type": "bonus_room",
+    "name_en": "Bonus Room",
+    "name_fr": "Salle Bonus",
+    "description": "A trick room that heals or buffs heroes — lure them into a false sense of safety.",
+    "w": 1, "h": 1,
+    "cost": {"wood": 8, "stone": 8},
+    "max_doors": 2,
+    "max_monsters": 0,
+    "bonus_types": ["heal", "buff_attack", "buff_defense", "reveal_map"]
+  },
+  {
+    "type": "barracks",
+    "name_en": "Barracks",
+    "name_fr": "Caserne",
+    "description": "Houses many monsters. Higher capacity than monster rooms.",
+    "w": 2, "h": 1,
+    "cost": {"wood": 25, "stone": 20},
+    "max_doors": 3,
+    "max_monsters": 6
+  },
+  {
+    "type": "kitchen",
+    "name_en": "Kitchen",
+    "name_fr": "Cuisine",
+    "description": "Produces food for your monsters. Assign cooks here.",
+    "w": 1, "h": 1,
+    "cost": {"wood": 15, "stone": 10},
+    "max_doors": 1,
+    "max_monsters": 2,
+    "production": {"meat": 5, "vegetables": 3}
+  },
+  {
+    "type": "workshop",
+    "name_en": "Workshop",
+    "name_fr": "Atelier",
+    "description": "Produces building materials. Assign workers here.",
+    "w": 1, "h": 1,
+    "cost": {"wood": 10, "stone": 15},
+    "max_doors": 1,
+    "max_monsters": 2,
+    "production": {"wood": 5, "stone": 5}
+  },
+  {
+    "type": "prison",
+    "name_en": "Prison",
+    "name_fr": "Prison",
+    "description": "Capture defeated heroes. They may reveal information.",
+    "w": 1, "h": 1,
+    "cost": {"wood": 10, "stone": 20},
+    "max_doors": 1,
+    "max_monsters": 1
+  }
+]

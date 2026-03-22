@@ -1,0 +1,84 @@
+{
+  "roles": [
+    {
+      "role": "counselor",
+      "name_en": "Counselor",
+      "name_fr": "Conseiller",
+      "description": "Your closest advisor. Guides strategy and diplomacy.",
+      "personality_by_race": {
+        "goblin": {"traits": ["sycophantic", "cunning", "paranoid"], "speech_style": "groveling and scheming"},
+        "orc": {"traits": ["blunt", "loyal", "superstitious"], "speech_style": "direct and gruff"},
+        "skeleton": {"traits": ["formal", "dry_humor", "nostalgic"], "speech_style": "archaic and melancholic"},
+        "imp": {"traits": ["sarcastic", "clever", "unreliable"], "speech_style": "mocking and witty"},
+        "dark_elf": {"traits": ["eloquent", "manipulative", "proud"], "speech_style": "elegant and condescending"},
+        "centaur": {"traits": ["wise", "philosophical", "patient"], "speech_style": "calm and measured"},
+        "troll": {"traits": ["confused", "earnest", "hungry"], "speech_style": "slow and food-obsessed"},
+        "slime": {"traits": ["bubbly", "agreeable", "forgetful"], "speech_style": "gurgling and enthusiastic"}
+      }
+    },
+    {
+      "role": "high_guard",
+      "name_en": "High Guard",
+      "name_fr": "Haut Garde",
+      "description": "Commander of dungeon defenses. Reports on threats.",
+      "personality_by_race": {
+        "goblin": {"traits": ["cowardly", "tactical", "twitchy"], "speech_style": "nervous and tactical"},
+        "orc": {"traits": ["fearless", "aggressive", "honorable"], "speech_style": "barking orders"},
+        "skeleton": {"traits": ["disciplined", "mechanical", "tireless"], "speech_style": "military precision"},
+        "imp": {"traits": ["reckless", "pyromanic", "boastful"], "speech_style": "excited about destruction"},
+        "dark_elf": {"traits": ["strategic", "ruthless", "perfectionist"], "speech_style": "cold and calculating"},
+        "centaur": {"traits": ["valiant", "protective", "stubborn"], "speech_style": "noble and commanding"},
+        "troll": {"traits": ["brutal", "simple", "intimidating"], "speech_style": "grunts and threats"},
+        "slime": {"traits": ["absorbent", "persistent", "shapeless"], "speech_style": "wobbly and determined"}
+      }
+    },
+    {
+      "role": "kitchen_chief",
+      "name_en": "Kitchen Chief",
+      "name_fr": "Chef Cuisinier",
+      "description": "Manages food production and monster morale through meals.",
+      "personality_by_race": {
+        "goblin": {"traits": ["greedy", "inventive", "unhygienic"], "speech_style": "excited about weird recipes"},
+        "orc": {"traits": ["meat_obsessed", "competitive", "generous"], "speech_style": "passionate about meat"},
+        "skeleton": {"traits": ["ironic", "precise", "tasteless"], "speech_style": "cannot taste but memorizes recipes"},
+        "imp": {"traits": ["pyromaniac_cook", "spicy", "chaotic"], "speech_style": "everything must burn"},
+        "dark_elf": {"traits": ["gourmet", "poisoner", "refined"], "speech_style": "sophisticated and suspicious"},
+        "centaur": {"traits": ["herbalist", "natural", "picky"], "speech_style": "prefers salads and grains"},
+        "troll": {"traits": ["voracious", "simple_tastes", "enthusiastic"], "speech_style": "eat everything raw"},
+        "slime": {"traits": ["dissolves_food", "experimental", "no_preference"], "speech_style": "absorbs flavors"}
+      }
+    },
+    {
+      "role": "spy_master",
+      "name_en": "Spy Master",
+      "name_fr": "Maître Espion",
+      "description": "Gathers intelligence on incoming hero parties.",
+      "personality_by_race": {
+        "goblin": {"traits": ["sneaky", "gossip", "two_faced"], "speech_style": "whispering and conspiratorial"},
+        "orc": {"traits": ["intimidating", "interrogator", "suspicious"], "speech_style": "threatening questions"},
+        "skeleton": {"traits": ["invisible", "patient", "eavesdropper"], "speech_style": "reports facts only"},
+        "imp": {"traits": ["shapeshifter", "liar", "playful"], "speech_style": "riddling and evasive"},
+        "dark_elf": {"traits": ["web_of_spies", "blackmailer", "paranoid"], "speech_style": "never direct"},
+        "centaur": {"traits": ["scout", "tracker", "honest"], "speech_style": "reluctant spy, prefers scouting"},
+        "troll": {"traits": ["oblivious", "accidentally_useful", "loud"], "speech_style": "doesn't understand subtlety"},
+        "slime": {"traits": ["infiltrator", "squeeze_anywhere", "amnesiac"], "speech_style": "vague recollections"}
+      }
+    },
+    {
+      "role": "architect",
+      "name_en": "Architect",
+      "name_fr": "Architecte",
+      "description": "Designs and maintains dungeon rooms and corridors.",
+      "personality_by_race": {
+        "goblin": {"traits": ["chaotic_builder", "shortcuts", "creative"], "speech_style": "enthusiastic about traps"},
+        "orc": {"traits": ["brutalist", "functional", "impatient"], "speech_style": "walls thick, doors big"},
+        "skeleton": {"traits": ["classical", "symmetrical", "perfectionist"], "speech_style": "references ancient architecture"},
+        "imp": {"traits": ["insane_designs", "portal_obsessed", "artistic"], "speech_style": "reality-bending ideas"},
+        "dark_elf": {"traits": ["elegant", "hidden_passages", "aesthetic"], "speech_style": "beauty in darkness"},
+        "centaur": {"traits": ["wide_corridors", "natural_materials", "practical"], "speech_style": "everything must accommodate hooves"},
+        "troll": {"traits": ["smash_build", "huge_rooms", "no_planning"], "speech_style": "just make bigger"},
+        "slime": {"traits": ["organic", "flowing", "no_corners"], "speech_style": "rooms should be round"}
+      }
+    }
+  ]
+}
