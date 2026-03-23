@@ -37,12 +37,57 @@ function renderGrid(state) {
   }
 }
 
+let selectedRoomRef = null;
+
+function showRoomDetails(room) {
+  selectedRoomRef = room;
+  const panel = document.getElementById("room-details");
+  const content = document.getElementById("room-details-content");
+  if (!panel || !content) return;
+
+  // Find monsters assigned to this room
+  const monsters = (gameState.data?.monsters || []).filter(
+    (m) => m.room_id === room.id
+  );
+  const monsterList = monsters.length
+    ? monsters.map((m) => m.name || m.type).join(", ")
+    : "None";
+
+  let html = `
+    <p><strong>Type:</strong> ${room.type.replace("_", " ")}</p>
+    <p><strong>Position:</strong> (${room.x}, ${room.y})</p>
+    <p><strong>Size:</strong> ${room.w}x${room.h}</p>
+  `;
+  if (room.type === "trap_room" && room.trap_type) {
+    html += `<p><strong>Trap:</strong> ${room.trap_type}</p>`;
+  }
+  html += `<p><strong>Monsters:</strong> ${monsterList}</p>`;
+
+  content.innerHTML = html;
+  panel.classList.remove("hidden");
+}
+
+function hideRoomDetails() {
+  selectedRoomRef = null;
+  const panel = document.getElementById("room-details");
+  if (panel) panel.classList.add("hidden");
+}
+
+async function removeSelectedRoom() {
+  if (!selectedRoomRef) return;
+  const result = await apiPost("/api/grid/remove-room", { room_id: selectedRoomRef.id });
+  hideRoomDetails();
+  await refreshState();
+}
+
 async function onCellClick(x, y, existingRoom) {
   if (existingRoom) {
-    // Right-click or shift-click could remove — for now just log
-    console.log("Room exists:", existingRoom);
+    showRoomDetails(existingRoom);
     return;
   }
+
+  // Hide details panel when clicking empty cell
+  hideRoomDetails();
 
   // Place selected room type
   const roomType = gameState.selectedRoom || "corridor";

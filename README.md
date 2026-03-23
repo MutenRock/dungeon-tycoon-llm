@@ -15,7 +15,7 @@ A dungeon management web game prototype where you play as a Dungeon Master, buil
 ### Requirements
 
 - Python 3.11+
-- An Anthropic API key (optional — game works with fallback dialogue)
+- **Ollama** (recommended — local, free) or an Anthropic API key
 
 ### Installation
 
@@ -31,12 +31,46 @@ source venv/bin/activate  # or venv\Scripts\activate on Windows
 # Install dependencies
 pip install -r requirements.txt
 
-# Configure (optional — for LLM features)
+# Configure
 cp .env.example .env
-# Edit .env and add your ANTHROPIC_API_KEY
+```
+
+### LLM Setup — Ollama (default)
+
+Install [Ollama](https://ollama.com), then pull a model:
+
+```bash
+ollama pull mistral
+```
+
+That's it — the game uses Ollama by default (`LLM_BACKEND=ollama` in `.env`).
+
+You can use any Ollama model (llama3, phi3, gemma2, etc.) by changing `OLLAMA_PRIMARY_MODEL` and `OLLAMA_FAST_MODEL` in `.env`.
+
+### LLM Setup — Anthropic (optional)
+
+To use Claude instead, set in `.env`:
+
+```
+LLM_BACKEND=anthropic
+ANTHROPIC_API_KEY=sk-ant-...
 ```
 
 ### Run
+
+**Using scripts (recommended):**
+
+```bash
+# Windows
+scripts\install.bat
+scripts\start.bat
+
+# Linux / macOS
+bash scripts/install.sh
+bash scripts/start.sh
+```
+
+**Or manually:**
 
 ```bash
 # Start the backend API server
@@ -49,6 +83,7 @@ python -m http.server 3000 --directory frontend
 Then open:
 - **New Game**: http://localhost:3000/setup.html
 - **Game**: http://localhost:3000/index.html
+- **Admin Panel**: http://localhost:3000/admin.html
 - **API Docs**: http://localhost:8000/docs
 
 ## Architecture
@@ -69,27 +104,33 @@ backend/
 frontend/
   index.html      # Main game interface
   setup.html      # Game creation wizard
+  admin.html      # Admin panel (backend diagnostics, LLM status, logs)
   assets/
     css/          # Styles (theme, game, dialogue, setup)
     js/           # Modules (api, state, grid, ui, dialogue, chatter, raid_view, i18n, setup)
 
 prompts/          # LLM prompt templates (see prompts/README.md)
+scripts/
+  install.sh/.bat # Installation (venv, deps, .env, Ollama check)
+  start.sh/.bat   # Launch backend + frontend servers
 docs/             # Game design and technical documentation
 saves/            # Game save files (gitignored)
 ```
 
 ## LLM Integration
 
-Two-tier system using the Anthropic SDK:
+Two-tier system supporting **Ollama** (local) or **Anthropic** (cloud):
 
-| Tier | Model | Purpose |
-|------|-------|---------|
-| **Primary** | Claude Sonnet/Opus | Advisor conversations, Lucifer intro, hidden wish scoring |
-| **Fast** | Claude Haiku | Monster chatter, hero dialogue, raid narration, naming |
+| Tier | Ollama (default) | Anthropic | Purpose |
+|------|-------------------|-----------|---------|
+| **Primary** | mistral (configurable) | Claude Sonnet/Opus | Advisor conversations, Lucifer intro, hidden wish scoring |
+| **Fast** | mistral (configurable) | Claude Haiku | Monster chatter, hero dialogue, raid narration, naming |
+
+Set `LLM_BACKEND=ollama` or `LLM_BACKEND=anthropic` in `.env`.
 
 **The LLM never decides game logic.** Only the hidden-wish score (a float) influences gameplay — outcomes are pre-defined.
 
-Without an API key, all dialogue falls back to pre-written templates.
+Without any LLM backend available, all dialogue falls back to pre-written templates.
 
 ## Key Features
 

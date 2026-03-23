@@ -20,5 +20,7 @@ function renderAll() {
   renderResources(gameState.data);
   renderAdvisors(gameState.data);
   renderStatusBar(gameState.data);
+  renderMonsters(gameState.data);
   renderLog(gameState.data);
+  checkGameOver();
 }

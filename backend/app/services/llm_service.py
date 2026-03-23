@@ -1,19 +1,22 @@
-"""Two-tier LLM service using the Anthropic SDK.
+"""Two-tier LLM service supporting Ollama (local) and Anthropic (cloud).
 
-Primary tier  — Claude Sonnet/Opus for real conversations (advisors, Lucifer, wish scoring)
-Fast tier     — Claude Haiku for background chatter, narration, naming
+Primary tier  — Stronger model for real conversations (advisors, Lucifer, wish scoring)
+Fast tier     — Lighter model for background chatter, narration, naming
 
-Falls back to cached/template responses when the API is unavailable.
+Falls back to cached/template responses when no LLM backend is available.
 """
 
 from __future__ import annotations
 
 import json
+import logging
 import random
 from pathlib import Path
 from typing import Any
 
 from backend.app.services.prompt_loader import PromptLoader
+
+logger = logging.getLogger(__name__)
 
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 
@@ -26,61 +29,172 @@ def _load_fallbacks() -> dict:
 
 
 class LLMService:
-    """Unified interface for all LLM calls, split into primary and fast tiers."""
+    """Unified interface for all LLM calls, split into primary and fast tiers.
+
+    Supports two backends:
+    - **ollama**: Local models via OpenAI-compatible API (default)
+    - **anthropic**: Claude models via Anthropic SDK
+    """
 
     def __init__(
         self,
-        api_key: str | None = None,
-        primary_model: str = "claude-sonnet-4-20250514",
-        fast_model: str = "claude-haiku-4-5-20251001",
+        backend: str = "ollama",
+        # Ollama settings
+        ollama_base_url: str = "http://localhost:11434/v1",
+        ollama_primary_model: str = "mistral",
+        ollama_fast_model: str = "mistral",
+        # Anthropic settings
+        anthropic_api_key: str | None = None,
+        anthropic_primary_model: str = "claude-sonnet-4-20250514",
+        anthropic_fast_model: str = "claude-haiku-4-5-20251001",
+        # Shared settings
         primary_timeout: int = 10,
         fast_timeout: int = 3,
         fallback_enabled: bool = True,
     ):
-        self.primary_model = primary_model
-        self.fast_model = fast_model
+        """Initialise the LLM service.
+
+        Args:
+            primary_timeout: Timeout for primary-tier calls **in seconds**.
+                The application config stores milliseconds; the caller
+                (``dependencies.py``) is responsible for converting to seconds
+                before passing them here.
+            fast_timeout: Timeout for fast-tier calls **in seconds**.
+                Same conversion note as *primary_timeout*.
+        """
+        self.backend = backend
         self.primary_timeout = primary_timeout
         self.fast_timeout = fast_timeout
         self.fallback_enabled = fallback_enabled
         self.prompt_loader = PromptLoader()
         self._fallbacks = _load_fallbacks()
-        self._client = None
 
+        self._ollama_client = None
+        self._anthropic_client = None
+        self._primary_model: str = ""
+        self._fast_model: str = ""
+
+        if backend == "ollama":
+            self._init_ollama(ollama_base_url, ollama_primary_model, ollama_fast_model, primary_timeout)
+            self.check_ollama_models()
+        elif backend == "anthropic":
+            self._init_anthropic(anthropic_api_key, anthropic_primary_model, anthropic_fast_model, primary_timeout)
+
+    def _init_ollama(self, base_url: str, primary_model: str, fast_model: str, timeout: int) -> None:
+        self._primary_model = primary_model
+        self._fast_model = fast_model
+        self._ollama_base_url = base_url
+        try:
+            from openai import OpenAI
+            self._ollama_client = OpenAI(base_url=base_url, api_key="ollama", timeout=timeout)
+        except ImportError:
+            logger.warning("openai package not installed — Ollama backend unavailable")
+
+    def _init_anthropic(self, api_key: str | None, primary_model: str, fast_model: str, timeout: int) -> None:
+        self._primary_model = primary_model
+        self._fast_model = fast_model
         if api_key:
             try:
                 from anthropic import Anthropic
-                self._client = Anthropic(api_key=api_key, timeout=primary_timeout)
+                self._anthropic_client = Anthropic(api_key=api_key, timeout=timeout)
             except ImportError:
-                pass
+                logger.warning("anthropic package not installed — Anthropic backend unavailable")
+
+    def check_ollama_models(self) -> None:
+        """Verify that the configured Ollama models are available.
+
+        Logs warnings for any missing models. Never raises — failures are
+        silently tolerated so the service can still fall back to templates.
+        """
+        if self._ollama_client is None:
+            return
+        # Ollama exposes a model listing on its native API (not the OpenAI shim).
+        # Derive the native URL from the OpenAI-compat base_url.
+        import urllib.request
+        import urllib.error
+        base = getattr(self, "_ollama_base_url", "http://localhost:11434/v1")
+        native_url = base.replace("/v1", "") + "/api/tags"
+        try:
+            with urllib.request.urlopen(native_url, timeout=5) as resp:
+                data = json.loads(resp.read().decode())
+            available = {m["name"].split(":")[0] for m in data.get("models", [])}
+            for label, model in [("primary", self._primary_model), ("fast", self._fast_model)]:
+                short = model.split(":")[0]
+                if short not in available:
+                    logger.warning(
+                        "Ollama %s model '%s' not found locally. "
+                        "Available models: %s. Pull it with: ollama pull %s",
+                        label, model, ", ".join(sorted(available)) or "(none)", model,
+                    )
+        except Exception as e:
+            logger.warning("Could not list Ollama models at %s: %s", native_url, e)
+
+    def health(self) -> dict:
+        """Return a lightweight status dict for monitoring / health-check endpoints."""
+        return {
+            "available": self.available,
+            "backend_name": self.backend_name,
+            "ollama_ok": self._ollama_client is not None,
+            "anthropic_ok": self._anthropic_client is not None,
+        }
 
     @property
     def available(self) -> bool:
-        return self._client is not None
+        return self._ollama_client is not None or self._anthropic_client is not None
+
+    @property
+    def backend_name(self) -> str:
+        if self._ollama_client:
+            return f"ollama ({self._primary_model})"
+        if self._anthropic_client:
+            return f"anthropic ({self._primary_model})"
+        return "fallback"
 
     # ------------------------------------------------------------------
     # Internal call helpers
     # ------------------------------------------------------------------
 
     def _call(self, model: str, system: str, user_msg: str, max_tokens: int = 300) -> str | None:
-        """Make a synchronous Anthropic API call. Returns None on failure."""
-        if not self._client:
-            return None
+        """Route the call to the active backend. Returns None on failure."""
+        if self._ollama_client:
+            return self._call_ollama(model, system, user_msg, max_tokens)
+        if self._anthropic_client:
+            return self._call_anthropic(model, system, user_msg, max_tokens)
+        return None
+
+    def _call_ollama(self, model: str, system: str, user_msg: str, max_tokens: int) -> str | None:
         try:
-            response = self._client.messages.create(
+            response = self._ollama_client.chat.completions.create(
+                model=model,
+                max_tokens=max_tokens,
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user_msg},
+                ],
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            logger.warning("LLM call failed (%s): %s", model, e)
+            return None
+
+    def _call_anthropic(self, model: str, system: str, user_msg: str, max_tokens: int) -> str | None:
+        try:
+            response = self._anthropic_client.messages.create(
                 model=model,
                 max_tokens=max_tokens,
                 system=system,
                 messages=[{"role": "user", "content": user_msg}],
             )
             return response.content[0].text
-        except Exception:
+        except Exception as e:
+            logger.warning("LLM call failed (%s): %s", model, e)
             return None
 
     def _primary(self, system: str, user_msg: str, max_tokens: int = 300) -> str | None:
-        return self._call(self.primary_model, system, user_msg, max_tokens)
+        return self._call(self._primary_model, system, user_msg, max_tokens)
 
     def _fast(self, system: str, user_msg: str, max_tokens: int = 150) -> str | None:
-        return self._call(self.fast_model, system, user_msg, max_tokens)
+        return self._call(self._fast_model, system, user_msg, max_tokens)
 
     def _fallback(self, category: str, lang: str = "en") -> str:
         items = self._fallbacks.get(category, {}).get(lang, [])

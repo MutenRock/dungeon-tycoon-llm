@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — Dungeon Tycoon LLM</title>
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <style>
+    body { font-family: 'Segoe UI', system-ui, sans-serif; padding: 20px; max-width: 1100px; margin: 0 auto; }
+    h1 { color: var(--gold); font-size: 22px; margin-bottom: 20px; }
+    h1 span { color: var(--text-secondary); font-size: 14px; font-weight: normal; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+    .card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+    .card h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); margin-bottom: 12px; }
+
+    .row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .row:last-child { border-bottom: none; }
+    .row .label { color: var(--text-secondary); }
+    .row .value { color: var(--text-primary); font-weight: 600; }
+
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+    .badge-ok { background: var(--green); color: #000; }
+    .badge-warn { background: var(--gold); color: #000; }
+    .badge-err { background: var(--red); color: #fff; }
+
+    .toolbar { display: flex; gap: 10px; margin-bottom: 16px; align-items: center; }
+    .toolbar button { font-size: 13px; padding: 6px 14px; }
+    .btn-secondary { background: var(--bg-cell); }
+    .btn-secondary:hover { background: var(--bg-cell-hover); }
+
+    #llm-test-result { font-size: 13px; color: var(--text-secondary); margin-left: 10px; }
+
+    .logs-box { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 6px; padding: 10px; max-height: 300px; overflow-y: auto; font-family: monospace; font-size: 12px; line-height: 1.6; }
+    .logs-box .entry { color: var(--text-secondary); border-bottom: 1px solid var(--border); padding: 3px 0; }
+
+    .json-box { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 6px; padding: 12px; max-height: 500px; overflow: auto; font-family: monospace; font-size: 11px; color: var(--green); white-space: pre-wrap; word-break: break-all; display: none; }
+
+    .loading { color: var(--text-secondary); font-style: italic; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); }
+    .nav { margin-bottom: 16px; font-size: 13px; }
+    .nav a { margin-right: 16px; }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="setup.html">New Game</a>
+    <a href="index.html">Game</a>
+    <a href="admin.html">Admin</a>
+  </div>
+
+  <h1>Admin Panel <span>— Dungeon Tycoon LLM</span></h1>
+
+  <div class="toolbar">
+    <button onclick="refresh()">Refresh</button>
+    <button class="btn-secondary" onclick="testLLM()">Test LLM</button>
+    <button class="btn-secondary" onclick="toggleRawState()">Raw State</button>
+    <span id="llm-test-result"></span>
+  </div>
+
+  <div class="grid">
+    <!-- System -->
+    <div class="card" id="card-system">
+      <h2>System</h2>
+      <div id="system-rows" class="loading">Loading...</div>
+    </div>
+
+    <!-- LLM -->
+    <div class="card" id="card-llm">
+      <h2>LLM Backend</h2>
+      <div id="llm-rows" class="loading">Loading...</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- Config -->
+    <div class="card">
+      <h2>Configuration</h2>
+      <div id="config-rows" class="loading">Loading...</div>
+    </div>
+
+    <!-- Game State -->
+    <div class="card">
+      <h2>Game State</h2>
+      <div id="game-rows" class="loading">Loading...</div>
+    </div>
+  </div>
+
+  <!-- Logs -->
+  <div class="card">
+    <h2>Game Logs (last 50)</h2>
+    <div id="logs-box" class="logs-box"><span class="loading">Loading...</span></div>
+  </div>
+
+  <!-- Raw JSON -->
+  <div id="raw-state" class="json-box"></div>
+
+  <script>
+    const API = 'http://localhost:8000';
+
+    function row(label, value, badge) {
+      const badgeHtml = badge ? ` <span class="badge badge-${badge}">${value}</span>` : '';
+      const valueHtml = badge ? '' : `<span class="value">${value}</span>`;
+      return `<div class="row"><span class="label">${label}</span>${valueHtml}${badgeHtml}</div>`;
+    }
+
+    function badgeFor(ok, trueText = 'OK', falseText = 'DOWN') {
+      return ok ? { text: trueText, cls: 'ok' } : { text: falseText, cls: 'err' };
+    }
+
+    async function fetchJSON(url) {
+      try {
+        const r = await fetch(url);
+        return await r.json();
+      } catch (e) {
+        return null;
+      }
+    }
+
+    async function refresh() {
+      const info = await fetchJSON(`${API}/api/admin/info`);
+      if (!info) {
+        document.getElementById('system-rows').innerHTML = '<span class="badge badge-err">Backend unreachable</span>';
+        return;
+      }
+
+      // System
+      const s = info.system;
+      document.getElementById('system-rows').innerHTML = [
+        row('Python', s.python.split(' ')[0]),
+        row('Platform', s.platform),
+        row('Project', s.project_dir),
+      ].join('');
+
+      // LLM
+      const l = info.llm;
+      const b = badgeFor(l.available);
+      document.getElementById('llm-rows').innerHTML = [
+        row('Status', b.text, b.cls),
+        row('Active Backend', l.active_backend),
+        row('Ollama', l.ollama_reachable ? 'Reachable' : 'Unreachable', l.ollama_reachable ? 'ok' : 'warn'),
+        row('Anthropic', l.anthropic_reachable ? 'Reachable' : 'Not configured', l.anthropic_reachable ? 'ok' : 'warn'),
+      ].join('');
+
+      // Config
+      const c = info.config;
+      document.getElementById('config-rows').innerHTML = [
+        row('LLM Backend', c.llm_backend),
+        row('Ollama URL', c.ollama_base_url),
+        row('Ollama Primary', c.ollama_primary_model),
+        row('Ollama Fast', c.ollama_fast_model),
+        row('Anthropic Key', c.anthropic_key_set ? 'Set' : 'Not set', c.anthropic_key_set ? 'ok' : 'warn'),
+        row('Fallback', c.fallback_enabled ? 'Enabled' : 'Disabled', c.fallback_enabled ? 'ok' : 'warn'),
+        row('Language', c.default_language),
+      ].join('');
+
+      // Game
+      const g = info.game;
+      const gameActive = badgeFor(g.has_active_game, 'Active', 'No game');
+      document.getElementById('game-rows').innerHTML = [
+        row('Game', gameActive.text, gameActive.cls),
+        row('Day', g.day),
+        row('Phase', g.phase),
+        row('Lives', `${g.lives} / 3`),
+        row('Treasure', g.treasure),
+        row('Rooms', g.rooms_placed),
+        row('Monsters', g.monsters_count),
+        row('Advisors', g.advisors_count),
+        row('Characters', g.characters_registered),
+        row('Log entries', g.log_entries),
+      ].join('');
+
+      // Logs
+      const logsData = await fetchJSON(`${API}/api/admin/logs?limit=50`);
+      const logsBox = document.getElementById('logs-box');
+      if (logsData && logsData.logs.length > 0) {
+        logsBox.innerHTML = logsData.logs.map(
+          (entry, i) => `<div class="entry">${logsData.total - logsData.logs.length + i + 1}. ${entry}</div>`
+        ).join('');
+        logsBox.scrollTop = logsBox.scrollHeight;
+      } else {
+        logsBox.innerHTML = '<span class="loading">No logs yet</span>';
+      }
+    }
+
+    async function testLLM() {
+      const el = document.getElementById('llm-test-result');
+      el.textContent = 'Testing...';
+      const result = await fetchJSON(`${API}/api/admin/llm-test`);
+      if (result) {
+        const icon = result.success ? 'OK' : 'FAIL';
+        el.innerHTML = `<span class="badge badge-${result.success ? 'ok' : 'err'}">${icon}</span> ${result.response} <span class="label">(${result.backend})</span>`;
+      } else {
+        el.innerHTML = '<span class="badge badge-err">Backend unreachable</span>';
+      }
+    }
+
+    async function toggleRawState() {
+      const el = document.getElementById('raw-state');
+      if (el.style.display === 'block') {
+        el.style.display = 'none';
+        return;
+      }
+      el.textContent = 'Loading...';
+      el.style.display = 'block';
+      const state = await fetchJSON(`${API}/api/admin/game-state`);
+      el.textContent = state ? JSON.stringify(state, null, 2) : 'Failed to load';
+    }
+
+    // Auto-refresh on load
+    refresh();
+  </script>
+</body>
+</html>

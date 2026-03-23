@@ -23,9 +23,13 @@ settings = Settings()
 # Singletons
 _repo = GameStateRepository(save_dir=settings.save_dir)
 _llm = LLMService(
-    api_key=settings.anthropic_api_key,
-    primary_model=settings.anthropic_primary_model,
-    fast_model=settings.anthropic_fast_model,
+    backend=settings.llm_backend,
+    ollama_base_url=settings.ollama_base_url,
+    ollama_primary_model=settings.ollama_primary_model,
+    ollama_fast_model=settings.ollama_fast_model,
+    anthropic_api_key=settings.anthropic_api_key,
+    anthropic_primary_model=settings.anthropic_primary_model,
+    anthropic_fast_model=settings.anthropic_fast_model,
     primary_timeout=settings.llm_primary_timeout // 1000,
     fast_timeout=settings.llm_fast_timeout // 1000,
     fallback_enabled=settings.llm_fallback_enabled,

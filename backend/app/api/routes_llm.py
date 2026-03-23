@@ -26,8 +26,9 @@ def daily_summary(llm=Depends(get_llm), repo=Depends(get_repo)):
 def llm_status(llm=Depends(get_llm)):
     return {
         "available": llm.available,
-        "primary_model": llm.primary_model,
-        "fast_model": llm.fast_model,
+        "backend": llm.backend_name,
+        "primary_model": llm._primary_model,
+        "fast_model": llm._fast_model,
     }
 
 

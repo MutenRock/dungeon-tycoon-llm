@@ -40,9 +40,29 @@
         <h3 data-i18n="advisors">Advisors</h3>
         <div id="advisor-list"></div>
       </div>
+
+      <!-- Monster Roster -->
+      <div id="monsters-panel" class="panel">
+        <h3>Monsters</h3>
+        <div id="monsters-list"></div>
+      </div>
+
+      <!-- Room Details -->
+      <div id="room-details" class="panel hidden">
+        <h3>Room Details</h3>
+        <div id="room-details-content"></div>
+        <button id="btn-remove-room" class="btn-danger" onclick="removeSelectedRoom()">Remove Room</button>
+      </div>
     </section>
 
     <section id="center-panel">
+      <!-- Save/Load Bar -->
+      <div id="save-load-bar" style="display: flex; gap: 8px; margin-bottom: 8px;">
+        <button onclick="saveGame()" title="Save current game">Save</button>
+        <button onclick="loadGame()" title="Load last save" class="btn-secondary">Load</button>
+        <span id="save-status" style="font-size: 12px; color: var(--text-secondary); line-height: 32px;"></span>
+      </div>
+
       <!-- Dungeon Grid -->
       <div id="grid-container">
         <div id="grid"></div>
@@ -87,6 +107,16 @@
       </div>
     </section>
   </main>
+
+  <!-- Game Over Modal -->
+  <div id="game-over-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <h2>DUNGEON DESTROYED</h2>
+      <p>Your dungeon has fallen. The heroes have claimed your treasure.</p>
+      <div id="game-over-stats"></div>
+      <button onclick="window.location.href='setup.html'">New Game</button>
+    </div>
+  </div>
 
   <script src="assets/js/api.js"></script>
   <script src="assets/js/state.js"></script>

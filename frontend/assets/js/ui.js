@@ -57,6 +57,37 @@ function renderStatusBar(state) {
   if (title && state.game_config?.dungeon_name) {
     title.textContent = state.game_config.dungeon_name;
   }
+
+  // Day/night visual feedback
+  document.body.classList.remove("phase-night", "phase-day");
+  if (phase) {
+    phase.classList.remove("phase-night", "phase-day");
+  }
+  if (state.phase === "night") {
+    document.body.classList.add("phase-night");
+    if (phase) phase.classList.add("phase-night");
+  } else if (state.phase === "day") {
+    document.body.classList.add("phase-day");
+    if (phase) phase.classList.add("phase-day");
+  }
+}
+
+function renderMonsters(state) {
+  const el = document.getElementById("monsters-list");
+  if (!el || !state?.monsters) return;
+  if (state.monsters.length === 0) {
+    el.innerHTML = '<p style="font-size:12px;color:var(--text-secondary);">No monsters yet</p>';
+    return;
+  }
+  el.innerHTML = state.monsters.map((m) => {
+    const badge = m.assigned_room_id
+      ? `<span class="monster-badge assigned">${m.assigned_task || "assigned"}</span>`
+      : '<span class="monster-badge idle">idle</span>';
+    return `<div class="monster-item">
+      <div class="monster-name">${m.name} <small>(${m.species})</small></div>
+      <div class="monster-stats">PWR ${m.power} ${badge}</div>
+    </div>`;
+  }).join("");
 }
 
 function renderLog(state) {
@@ -84,6 +115,41 @@ function renderRoomPalette() {
     };
     el.appendChild(item);
   });
+}
+
+function checkGameOver() {
+  const modal = document.getElementById("game-over-modal");
+  if (!modal || !gameState.data) return;
+  if (gameState.data.lives <= 0) {
+    const stats = document.getElementById("game-over-stats");
+    if (stats) {
+      stats.innerHTML = `
+        <p>Final Day: <strong>${gameState.data.day}</strong></p>
+        <p>Treasure: <strong>${gameState.data.treasure}</strong></p>
+      `;
+    }
+    modal.classList.remove("hidden");
+  } else {
+    modal.classList.add("hidden");
+  }
+}
+
+// Save/Load handlers
+async function saveGame() {
+  const res = await apiPost("/api/game/save");
+  document.getElementById("save-status").textContent = res.error ? "Save failed!" : "Game saved!";
+  setTimeout(() => document.getElementById("save-status").textContent = "", 3000);
+}
+
+async function loadGame() {
+  const res = await apiPost("/api/game/load");
+  if (!res.error) {
+    document.getElementById("save-status").textContent = "Game loaded!";
+    await refreshState();
+  } else {
+    document.getElementById("save-status").textContent = "No save found";
+  }
+  setTimeout(() => document.getElementById("save-status").textContent = "", 3000);
 }
 
 // Button handlers

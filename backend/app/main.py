@@ -12,6 +12,7 @@ from backend.app.api.routes_characters import router as characters_router
 from backend.app.api.routes_bestiary import router as bestiary_router
 from backend.app.api.routes_patterns import router as patterns_router
 from backend.app.api.routes_llm import router as llm_router
+from backend.app.api.routes_admin import router as admin_router
 
 app = FastAPI(
     title="Dungeon Tycoon LLM",
@@ -36,6 +37,7 @@ app.include_router(characters_router)
 app.include_router(bestiary_router)
 app.include_router(patterns_router)
 app.include_router(llm_router)
+app.include_router(admin_router)
 
 
 @app.get("/")
