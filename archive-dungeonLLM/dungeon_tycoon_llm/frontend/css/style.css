@@ -1,0 +1,30 @@
+/* Style simplifié basé sur la version précédente */
+:root {
+  --bg: #0d0d0d; --surface: #161616; --surface2: #1e1e1e; --border: #2a2a2a;
+  --accent: #c0a060; --danger: #8b2020; --primary: #1e5c3a;
+  --cell: 42px; --gap: 2px;
+}
+* { box-sizing: border-box; margin:0; padding:0; }
+body { background:var(--bg); color:#c8c8c8; font-family:system-ui; height:100vh; display:flex; flex-direction:column;}
+#topbar { display:flex; align-items:center; gap:12px; padding:8px 16px; background:#111; border-bottom:1px solid var(--border);}
+#game-title { font-size:18px; font-weight:700; color:var(--accent); margin-right:auto;}
+.hud-pill { padding:4px 10px; border-radius:4px; background:var(--surface2); border:1px solid var(--border); font-size:13px;}
+.phase-night { border-color:#2d3a6b; color:#8090d0;}
+.phase-day { border-color:#8b6520; color:#e0a040;}
+#layout { display:grid; grid-template-columns:220px 1fr 260px; flex:1; overflow:hidden; }
+aside,#grid-section { padding:12px; overflow-y:auto; background:var(--surface);}
+#panel-right { border-left:1px solid var(--border);} 
+.panel-block { margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--border);}
+.panel-block h3 { font-size:12px; text-transform:uppercase; color:var(--accent); margin-bottom:8px;}
+.btn { display:block; width:100%; padding:7px 10px; border-radius:4px; border:1px solid var(--border); background:var(--surface2); color:#c8c8c8; cursor:pointer; margin-bottom:6px;}
+.btn-primary{background:var(--primary);}
+.btn-danger{background:var(--danger);}
+#dungeon-grid{display:grid;grid-template-columns:repeat(10,var(--cell));grid-template-rows:repeat(10,var(--cell));gap:var(--gap);background:#111;border:1px solid var(--border);padding:3px;}
+.cell{width:var(--cell);height:var(--cell);background:#181818;border:1px solid #222;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.cell.corridor{background:#1a1a2e;}
+.cell.monster_room{background:#2a1010;}
+.cell.trap_room{background:#1a1a10;}
+.cell.treasure_room{background:#1a2a10;}
+.cell.boss_room{background:#2a1030;}
+#log{display:flex;flex-direction:column;gap:6px;}
+.log-entry{padding:6px 8px;border-radius:4px;font-size:12px;background:var(--surface2);}

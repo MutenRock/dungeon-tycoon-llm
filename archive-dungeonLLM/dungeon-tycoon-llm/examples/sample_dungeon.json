@@ -1,0 +1,28 @@
+{
+  "rooms": [
+    {
+      "id": "boss_room",
+      "type": "boss_room",
+      "x": 8,
+      "y": 8,
+      "w": 2,
+      "h": 1
+    },
+    {
+      "id": "room_001",
+      "type": "corridor",
+      "x": 0,
+      "y": 0,
+      "w": 1,
+      "h": 1
+    },
+    {
+      "id": "room_002",
+      "type": "trap_room",
+      "x": 1,
+      "y": 0,
+      "w": 1,
+      "h": 1
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pydantic
+websockets
+python-dotenv
+openai>=1.14.0
+httpx<0.28.0

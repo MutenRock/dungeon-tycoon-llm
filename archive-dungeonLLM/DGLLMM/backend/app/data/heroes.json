@@ -1,0 +1,17 @@
+[
+  {
+    "hero_class": "knight",
+    "hp": 10,
+    "attack": 3
+  },
+  {
+    "hero_class": "rogue",
+    "hp": 8,
+    "attack": 4
+  },
+  {
+    "hero_class": "cleric",
+    "hp": 9,
+    "attack": 2
+  }
+]

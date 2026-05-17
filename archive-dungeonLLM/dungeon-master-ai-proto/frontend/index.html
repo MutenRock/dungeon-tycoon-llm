@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dungeon Master AI</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <!-- ECRAN 1 : MENU PRINCIPAL -->
+    <div id="screen-menu" class="screen active">
+        <div class="menu-box">
+            <h1>Dungeon Master AI</h1>
+            <p>Conquérez le monde des humains.</p>
+            <button onclick="showScreen('screen-setup')">Nouvelle Partie</button>
+        </div>
+    </div>
+
+    <!-- ECRAN 2 : SETUP -->
+    <div id="screen-setup" class="screen">
+        <div class="menu-box setup-box">
+            <h2>Création du Maître</h2>
+            <div class="form-group">
+                <label>Nom :</label><input type="text" id="player-name" value="Zargoth">
+            </div>
+            <div class="form-group">
+                <label>Race :</label>
+                <select id="player-race">
+                    <option value="Démon">Démon (Pack: Diablotins)</option>
+                    <option value="Liche">Liche (Pack: Squelettes)</option>
+                    <option value="Vampire">Vampire (Pack: Chauves-souris)</option>
+                    <option value="Roi Gobelin">Roi Gobelin (Pack: Gobelins)</option>
+                </select>
+            </div>
+            <h2>Nom du Donjon</h2>
+            <div class="wheel-container">
+                <select id="dungeon-word1" class="wheel"><option value="Le Gouffre">Le Gouffre</option><option value="La Tour">La Tour</option></select>
+                <select id="dungeon-word2" class="wheel"><option value="Sanglant">Sanglant</option><option value="Oublié">Oublié</option></select>
+            </div>
+            <button class="start-btn" onclick="startIntro()">Rencontrer Lucifer</button>
+        </div>
+    </div>
+
+    <!-- ECRAN 3 : INTRO LUCIFER -->
+    <div id="screen-intro" class="screen">
+        <div class="chat-section full-width">
+            <h2>Les Portes de l'Enfer</h2>
+            <p class="subtitle">Lucifer vous confie votre mission...</p>
+            <div id="chat-history" class="chat-history">
+                <div class="msg lucifer" id="lucifer-first-msg">Ah, un nouveau candidat. Prépare-toi à descendre sur terre pour amasser de l'or. Préfères-tu la force brute, la magie ou la ruse pour écraser les humains ?</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Répondre à Lucifer..." onkeypress="handleEnter(event)" autocomplete="off">
+                <button onclick="sendMessage()">Parler</button>
+            </div>
+            <button id="btn-to-dungeon" class="hidden start-btn" style="margin-top:20px; width:100%;" onclick="startLoading()">Descendre dans le Donjon</button>
+        </div>
+    </div>
+
+    <!-- ECRAN CHARGEMENT -->
+    <div id="screen-loading" class="screen">
+        <div class="loading-box">
+            <h2>Descente sur Terre...</h2>
+            <div class="spinner"></div>
+            <p id="loading-text">Installation du trône...</p>
+        </div>
+    </div>
+
+    <!-- ECRAN 4 : JEU -->
+    <div id="screen-game" class="screen">
+        <div class="game-top-bar">
+            <h2 id="display-dungeon-name">Mon Donjon</h2>
+            <div id="player-inventory" style="color:#ffcc00; font-weight:bold; font-size:1.2em;">Or: 100 💰 | Vies: 3 ❤️</div>
+            <div class="controls">
+                <select id="spawn-race">
+                    <option value="Gobelin">Gobelin</option>
+                    <option value="Squelette">Squelette</option>
+                    <option value="Orc">Orc</option>
+                </select>
+                <button onclick="spawnMonster()">+ Invoquer Monstre</button>
+                <button class="combat-btn" onclick="startCombat()">⚔️ Attaque de Héros</button>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <div class="dungeon-section locked">
+                <div class="wip-overlay"><h3>[ WIP ] Mappage du Donjon Verrouillé</h3></div>
+                <div id="grid" class="grid-container"></div>
+            </div>
+
+            <div class="npc-section">
+                <h3>Caserne <span id="reward-badge" style="font-size:0.7em; background:#444; padding:3px 8px; border-radius:10px; color:#aaa; margin-left:10px;"></span></h3>
+                <div id="barracks" class="barracks-area"></div>
+                <div class="combat-log-container">
+                    <h4>Journal de Combat</h4>
+                    <div id="combat-log">Le donjon est calme...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/llm_chat.js"></script>
+    <script src="/static/js/npc_sim.js"></script>
+    <script src="/static/js/jrpg_combat.js"></script>
+</body>
+</html>

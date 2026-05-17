@@ -1,0 +1,31 @@
+{
+  "starting_treasure": 100,
+  "starting_lives": 3,
+  "room_costs": {
+    "corridor": {
+      "wood": 1,
+      "stone": 0,
+      "meat": 0
+    },
+    "monster_room": {
+      "wood": 2,
+      "stone": 2,
+      "meat": 0
+    },
+    "trap_room": {
+      "wood": 1,
+      "stone": 3,
+      "meat": 0
+    },
+    "treasure_room": {
+      "wood": 2,
+      "stone": 1,
+      "meat": 0
+    },
+    "boss_room": {
+      "wood": 0,
+      "stone": 0,
+      "meat": 0
+    }
+  }
+}

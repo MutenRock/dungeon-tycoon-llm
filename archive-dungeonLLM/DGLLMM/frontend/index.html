@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dungeon Tycoon LLM</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<header id="topbar">
+  <span id="game-title">☠ Dungeon Tycoon</span>
+  <div id="hud">
+    <span id="hud-phase" class="hud-pill phase-night">🌙 Nuit — Tour <span id="hud-turn">1</span></span>
+    <span id="hud-lives" class="hud-pill">♥ <span id="hud-lives-val">3</span>/3</span>
+    <span id="hud-treasure" class="hud-pill">💰 <span id="hud-treasure-val">100</span></span>
+  </div>
+  <div id="topbar-actions">
+    <button id="btn-new"   class="btn btn-dim">Nouvelle partie</button>
+    <button id="btn-save"  class="btn btn-dim">Sauvegarder</button>
+    <button id="btn-load"  class="btn btn-dim">Charger</button>
+  </div>
+</header>
+
+<main id="layout">
+  <aside id="panel-left">
+    <section class="panel-block">
+      <h3>⛏ Ressources</h3>
+      <ul id="resources">
+        <li>🪵 Bois : <strong id="res-wood">15</strong></li>
+        <li>🪨 Pierre : <strong id="res-stone">10</strong></li>
+        <li>🥩 Viande : <strong id="res-meat">5</strong></li>
+      </ul>
+    </section>
+    <section class="panel-block">
+      <h3>🏗 Poser une salle</h3>
+      <p class="hint">Sélectionne un type puis clique sur la grille.</p>
+      <div id="room-selector">
+        <button class="room-btn" data-room="corridor"      data-w="1" data-h="1">⬜ Corridor</button>
+        <button class="room-btn" data-room="monster_room"  data-w="1" data-h="1">👹 Salle Monstre</button>
+        <button class="room-btn" data-room="trap_room"     data-w="1" data-h="1">⚡ Salle Piège</button>
+        <button class="room-btn" data-room="treasure_room" data-w="1" data-h="1">💎 Salle Trésor</button>
+        <button class="room-btn" data-room="boss_room"     data-w="2" data-h="1">💀 Salle Boss (2×1)</button>
+      </div>
+      <button id="btn-demolish" class="btn btn-danger" style="margin-top:8px">🔨 Mode démolition</button>
+    </section>
+    <section class="panel-block" id="monster-panel" style="display:none">
+      <h3>👹 Assigner un monstre</h3>
+      <p id="monster-target" class="hint"></p>
+      <div id="monster-selector">
+        <button class="monster-btn" data-monster="goblin">🐾 Gobelin</button>
+        <button class="monster-btn" data-monster="skeleton">💀 Squelette</button>
+        <button class="monster-btn" data-monster="orc">🗡 Orc</button>
+        <button class="monster-btn" data-monster="troll">🧌 Troll</button>
+        <button class="monster-btn" data-monster="">❌ Retirer</button>
+      </div>
+    </section>
+    <section class="panel-block">
+      <h3>⚙ Actions</h3>
+      <button id="btn-end-night" class="btn btn-primary">🌅 Terminer la nuit</button>
+      <button id="btn-raid"      class="btn btn-danger"  style="display:none">⚔ Lancer le raid</button>
+    </section>
+    <section class="panel-block">
+      <h3>ℹ Coûts</h3>
+      <table id="costs-table">
+        <tr><th>Salle</th><th>🪵</th><th>🪨</th></tr>
+        <tr><td>Corridor</td><td>1</td><td>0</td></tr>
+        <tr><td>Monstre</td><td>2</td><td>1</td></tr>
+        <tr><td>Piège</td><td>1</td><td>2</td></tr>
+        <tr><td>Trésor</td><td>2</td><td>2</td></tr>
+        <tr><td>Boss</td><td>3</td><td>3</td></tr>
+      </table>
+    </section>
+  </aside>
+
+  <section id="grid-section">
+    <div id="grid-header">
+      <span id="grid-label">Donjon — 10×10</span>
+      <span id="grid-mode-label" class="hint"></span>
+    </div>
+    <div id="dungeon-grid"></div>
+  </section>
+
+  <aside id="panel-right">
+    <h3>📜 Journal</h3>
+    <div id="log"></div>
+    <div id="narrative-box" style="display:none">
+      <h4>✨ Récit</h4>
+      <p id="narrative-text"></p>
+    </div>
+  </aside>
+</main>
+
+<div id="overlay-gameover" style="display:none">
+  <div id="gameover-box">
+    <h2>☠ GAME OVER</h2>
+    <p id="gameover-msg">Le boss a été vaincu trois fois. Le donjon est perdu.</p>
+    <button id="btn-restart" class="btn btn-primary">Recommencer</button>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/grid.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

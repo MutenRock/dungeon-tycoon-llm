@@ -1,0 +1,27 @@
+[
+  {
+    "type": "corridor",
+    "w": 1,
+    "h": 1
+  },
+  {
+    "type": "monster_room",
+    "w": 1,
+    "h": 1
+  },
+  {
+    "type": "trap_room",
+    "w": 1,
+    "h": 1
+  },
+  {
+    "type": "treasure_room",
+    "w": 1,
+    "h": 1
+  },
+  {
+    "type": "boss_room",
+    "w": 2,
+    "h": 1
+  }
+]

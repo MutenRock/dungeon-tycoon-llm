@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dungeon Tycoon LLM</title>
+  <link rel="stylesheet" href="assets/css/reset.css" />
+  <link rel="stylesheet" href="assets/css/theme.css" />
+  <link rel="stylesheet" href="assets/css/game.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Dungeon Tycoon LLM</h1>
+    <p>Build by night. Survive by day.</p>
+  </header>
+
+  <main class="layout">
+    <aside class="panel">
+      <h2>Resources</h2>
+      <div id="resource-panel"></div>
+
+      <h2>Actions</h2>
+      <button id="new-game-btn">New Game</button>
+      <button id="place-room-btn">Place Corridor</button>
+      <button id="night-btn">Resolve Night</button>
+      <button id="raid-btn">Start Raid</button>
+
+      <h2>Boss Status</h2>
+      <div id="boss-status"></div>
+    </aside>
+
+    <section class="center-panel">
+      <h2>Dungeon Grid</h2>
+      <div id="grid" class="grid"></div>
+    </section>
+
+    <aside class="panel">
+      <h2>Raid Logs</h2>
+      <pre id="raid-log" class="log-box"></pre>
+
+      <h2>Daily Summary</h2>
+      <pre id="daily-summary" class="log-box"></pre>
+    </aside>
+  </main>
+
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/state.js"></script>
+  <script src="assets/js/grid.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/raid_view.js"></script>
+  <script src="assets/js/llm_log.js"></script>
+</body>
+</html>

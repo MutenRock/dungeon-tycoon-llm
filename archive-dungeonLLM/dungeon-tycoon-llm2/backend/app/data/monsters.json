@@ -1,0 +1,14 @@
+[
+  {
+    "kind": "goblin",
+    "power": 4
+  },
+  {
+    "kind": "skeleton",
+    "power": 5
+  },
+  {
+    "kind": "beast",
+    "power": 6
+  }
+]

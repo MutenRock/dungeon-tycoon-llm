@@ -1,0 +1,93 @@
+
+body { background: #0a0a0a; color: #e0e0e0; font-family: sans-serif; padding: 20px; display: flex; justify-content: center; min-height: 100vh; margin: 0; }
+.screen { display: none; width: 100%; max-width: 1400px; flex-direction: column; align-items: center;}
+.screen.active { display: flex; }
+.hidden { display: none !important; }
+
+/* Menus */
+.menu-box { background: #1a1a1a; padding: 40px; border-radius: 10px; border: 2px solid #333; text-align: center; width: 400px;}
+.menu-box button { width: 100%; padding: 15px; margin: 10px 0; background: #3d0000; color: white; border: 1px solid #ff4444; cursor: pointer; border-radius: 5px; }
+.setup-box { width: 500px; text-align: left; }
+.form-group { margin-bottom: 15px; }
+.form-group input, .form-group select { width: 100%; padding: 10px; background: #222; color: white; border: 1px solid #444; }
+.wheel-container { display: flex; gap: 10px; margin-bottom: 30px; }
+.wheel { flex: 1; padding: 10px; background: #222; color: #ff4444; }
+
+/* Loading */
+.loading-box { text-align: center; margin-top: 20vh; }
+.spinner { width: 50px; height: 50px; border: 5px solid #333; border-top: 5px solid #ff4444; border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Chat Lucifer - Fix Left/Right */
+.chat-section { width: 100%; max-width: 800px; background: #1e1e1e; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; height: 70vh;}
+.chat-history { flex-grow: 1; background: #121212; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; border: 1px solid #333;}
+.msg { padding: 10px 15px; border-radius: 8px; max-width: 80%; line-height: 1.4; word-wrap: break-word;}
+.msg.lucifer { background: #2a0808; border-left: 4px solid #ff4444; align-self: flex-start; color: #e8b0b0;}
+.msg.player { background: #081a2a; border-right: 4px solid #4488ff; align-self: flex-end; color: #b0d0e8;}
+.chat-input-area { display: flex; gap: 10px; }
+.chat-input-area input { flex-grow: 1; padding: 12px; background: #222; color: white; border: 1px solid #444; }
+.chat-input-area button { padding: 12px 20px; background: #ff4444; color: white; border: none; cursor: pointer; }
+
+/* Game UI */
+.game-top-bar { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 20px; background: #1a1a1a; padding: 10px 20px; border: 1px solid #333;}
+.controls button { padding: 8px 15px; background: #333; color: white; border: 1px solid #555; cursor: pointer; border-radius: 4px;}
+.controls .combat-btn { background: #8b0000; font-weight: bold; border-color: #ff4444;}
+.game-container { display: flex; gap: 20px; width: 100%; height: 75vh; }
+
+/* Grid Locked */
+.dungeon-section { flex: 1; position: relative; background: #222; border: 2px solid #444; }
+.grid-container { display: grid; grid-template-columns: repeat(10, 1fr); height: 100%; opacity: 0.3; }
+.grid-container div { border: 1px solid #111; }
+.wip-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 10; background: rgba(0,0,0,0.5); pointer-events: none; }
+.wip-overlay h3 { background: #ff4444; padding: 10px 20px; border-radius: 5px; transform: rotate(-5deg);}
+
+/* Barracks & Combat */
+.npc-section { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+.barracks-area { flex: 2; background: #1a1a1a; border: 2px solid #333; position: relative; overflow: hidden; border-radius: 5px;}
+.combat-log-container { flex: 1; background: #0a0a0a; border: 1px solid #444; padding: 10px; overflow-y: auto; font-family: monospace; font-size: 0.9em; border-radius: 5px; color: #ccc;}
+.combat-log-container h4 { margin: 0 0 10px 0; color: #ffaa00; }
+
+/* Entity Sprites */
+.entity { position: absolute; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: top 0.2s linear, left 0.2s linear;}
+.entity.monster { background: #4caf50; box-shadow: 0 0 10px #4caf50;}
+.entity.hero { background: #2196f3; box-shadow: 0 0 10px #2196f3;}
+
+/* Speech Bubble */
+.bubble { position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: white; color: black; padding: 5px 8px; border-radius: 8px; font-size: 12px; white-space: nowrap; z-index: 100; pointer-events: none;}
+.bubble::after { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: white transparent transparent transparent; }
+
+.loading-dots::after {
+  content: '...';
+  animation: dots 1.5s steps(4, end) infinite;
+}
+@keyframes dots { 0%, 20% { color: transparent; text-shadow: .25em 0 0 transparent, .5em 0 0 transparent; } 40% { color: #aaa; text-shadow: .25em 0 0 transparent, .5em 0 0 transparent; } 60% { text-shadow: .25em 0 0 #aaa, .5em 0 0 transparent; } 80%, 100% { text-shadow: .25em 0 0 #aaa, .5em 0 0 #aaa; } }
+.special-unit { border: 2px solid #ffaa00; box-shadow: 0 0 15px #ffaa00 !important; }
+
+/* Arena JRPG Layout */
+.combat-arena { display: flex; width: 100%; height: 100%; align-items: center; justify-content: space-between; padding: 20px; box-sizing: border-box; }
+.team-side { display: flex; flex-direction: column; gap: 20px; width: 40%; height: 100%; justify-content: center;}
+.team-side.heroes { align-items: flex-start; }
+.team-side.monsters { align-items: flex-end; }
+
+.combat-row { display: flex; gap: 15px; justify-content: center; }
+
+/* Entités en combat */
+.combat-entity { position: relative; width: 50px; height: 50px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 24px; transition: 0.3s; }
+.combat-entity .hp-bar-container { position: absolute; top: -10px; width: 100%; height: 5px; background: #333; border-radius: 2px; overflow: hidden; }
+.combat-entity .hp-bar { height: 100%; background: #4caf50; width: 100%; transition: width 0.3s; }
+.combat-entity .name-tag { position: absolute; bottom: -15px; font-size: 10px; white-space: nowrap; color: #ccc; }
+
+.combat-entity.hero { background: #1a2a3a; border: 2px solid #4488ff; }
+.combat-entity.monster { background: #2a1a1a; border: 2px solid #ff4444; }
+
+/* Animations de combat */
+@keyframes attack-right { 0% { transform: translateX(0); } 50% { transform: translateX(30px) scale(1.1); } 100% { transform: translateX(0); } }
+@keyframes attack-left { 0% { transform: translateX(0); } 50% { transform: translateX(-30px) scale(1.1); } 100% { transform: translateX(0); } }
+@keyframes damage-flash { 0% { filter: brightness(1); } 50% { filter: brightness(3) sepia(1) hue-rotate(-50deg) saturate(5); } 100% { filter: brightness(1); } }
+
+.anim-attack-hero { animation: attack-right 0.4s ease-in-out; }
+.anim-attack-monster { animation: attack-left 0.4s ease-in-out; }
+.anim-damage { animation: damage-flash 0.3s ease-in-out; }
+
+/* Bubbles in combat */
+.combat-bubble { position: absolute; bottom: 130%; background: white; color: black; padding: 6px 10px; border-radius: 10px; font-size: 11px; white-space: nowrap; z-index: 100; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.3);}

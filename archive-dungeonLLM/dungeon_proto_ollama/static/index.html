@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeon Master AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Section Donjon (Grille) -->
+        <div class="dungeon-section">
+            <h2>Mon Donjon (Phase Nuit)</h2>
+            <div id="grid" class="grid-container"></div>
+            <div id="floating-barks" class="barks-container">
+                <!-- Les bulles WebSocket apparaîtront ici -->
+            </div>
+        </div>
+
+        <!-- Section Foreground Chat (Lucifer/Conseillers) -->
+        <div class="chat-section">
+            <h2>Audience avec Lucifer</h2>
+            <div id="chat-history" class="chat-history">
+                <div class="msg lucifer">Bienvenue en Enfer. Prêt à bâtir ton donjon ?</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Répondre à Lucifer..." autocomplete="off">
+                <button onclick="sendMessage()">Envoyer</button>
+            </div>
+            <div class="wish-meter">
+                Jauge de satisfaction (Hidden Wish) : <span id="wish-score">50</span>%
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

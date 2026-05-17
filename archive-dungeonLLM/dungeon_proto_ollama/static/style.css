@@ -1,0 +1,41 @@
+
+* { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background-color: #121212; color: #e0e0e0; margin: 0; padding: 20px; display: flex; justify-content: center; }
+.game-container { display: flex; gap: 30px; max-width: 1200px; width: 100%; }
+
+/* Grid 10x10 */
+.dungeon-section { flex: 2; position: relative; }
+.grid-container { 
+    display: grid; 
+    grid-template-columns: repeat(10, 1fr); 
+    gap: 2px; 
+    background-color: #333; 
+    padding: 2px;
+    border: 4px solid #444;
+}
+.cell { 
+    aspect-ratio: 1; 
+    background-color: #222; 
+    border: 1px solid #111; 
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.cell:hover { background-color: #3a3a3a; }
+.cell.boss { background-color: #8b0000; grid-column: span 2; } /* Salle du boss 2x1 */
+.cell.trap { background-color: #d2691e; }
+.cell.room { background-color: #4a4a4a; }
+
+/* Chat Section */
+.chat-section { flex: 1; background: #1e1e1e; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; }
+.chat-history { flex-grow: 1; background: #121212; padding: 10px; overflow-y: auto; min-height: 300px; max-height: 400px; margin-bottom: 10px; border-radius: 4px;}
+.msg { margin-bottom: 10px; padding: 8px; border-radius: 4px; }
+.msg.lucifer { background: #3d0000; border-left: 3px solid #ff4444; }
+.msg.player { background: #003366; text-align: right; border-right: 3px solid #4488ff; }
+.chat-input-area { display: flex; gap: 10px; }
+input { flex-grow: 1; padding: 10px; background: #333; color: white; border: none; border-radius: 4px; }
+button { padding: 10px 15px; background: #ff4444; color: white; border: none; border-radius: 4px; cursor: pointer; }
+button:hover { background: #ff6666; }
+.wish-meter { margin-top: 15px; font-size: 0.9em; color: #aaa; }
+
+/* Background Barks (WebSocket) */
+.barks-container { margin-top: 20px; min-height: 60px; font-style: italic; color: #88c0d0; }

@@ -1,0 +1,13 @@
+:root {
+  --bg: #111827;
+  --panel: #1f2937;
+  --soft: #374151;
+  --text: #f9fafb;
+  --accent: #f59e0b;
+  --good: #10b981;
+  --bad: #ef4444;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+}

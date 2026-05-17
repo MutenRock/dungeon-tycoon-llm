@@ -1,0 +1,10 @@
+{
+  "id": "raid_001",
+  "success": true,
+  "treasure_delta": -10,
+  "boss_damage": 1,
+  "logs": [
+    "A party of heroes enters the dungeon.",
+    "Elaine triggers a trap and loses 2 HP."
+  ]
+}
